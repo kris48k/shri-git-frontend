@@ -31,8 +31,7 @@ export default defineComponent({
 </script>
 
 <template>            
-    <h1>Выберите репозиторий с домашней работой {{name}}</h1>
     <main>
-        <n-select v-model:value="value" :options="options" @update:value="handleUpdateValue"/>
+        <n-select v-model:value="value" placeholder="Выберите репозиторий с домашней работой" :options="options" @update:value="handleUpdateValue"/>
     </main>
 </template>

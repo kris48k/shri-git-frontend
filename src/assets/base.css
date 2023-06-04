@@ -1,74 +1,194 @@
-/* color palette from <https://github.com/vuejs/theme> */
+@font-face {
+  font-family: 'YS Text';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/text-light.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/text-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/text-light-italic.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/text-light-italic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/text-regular.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/text-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/text-regular-italic.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/text-regular-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/text-medium.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/text-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/text-medium-italic.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/text-medium-italic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/text-bold.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/text-bold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/text-bold-italic.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/text-bold-italic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Display';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/display-thin.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/display-thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Display';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/display-light.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/display-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Display';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/display-regular.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/display-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Display';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/display-medium.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/display-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Display';
+  src: url('https://yastatic.net/s3/home/fonts/ys/4/display-bold.woff') format('woff'),url('https://yastatic.net/s3/home/fonts/ys/4/display-bold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'YS Display';
+  src: url('https://yastatic.net/s3/home/fonts/ys/1/display-heavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+}
+
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --color-text: #ffffff;
+  --color-background: #070717;
+  --color-header-text: rgba(228, 228, 227, 1);
+  --font-family: YS Text, Helvetica, Arial, sans-serif;
+  --link-color: #018ad2;
+  --yellow-link: #FFD400;
+  --button: #ffdf39;
+  --button-hover: #5a54ff;
 }
 
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  position: relative;
-  font-weight: normal;
-}
 
 body {
-  min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
-  transition: color 0.5s, background-color 0.5s;
-  line-height: 1.6;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background);
+  font-family: var(--font-family);
+}
+
+h1 {
+  color: var(--color-header-text);
+  font-family: var(--font-family);
+  font-size: 3.2rem;
+}
+
+h1 .git {
+  color: var(--link-color);
+
+}
+
+h2 {
+  color: var(--color-header-text);
+  font-family: var(--font-family);
+  font-size: 2.4rem;
+}
+
+.central-content {
+  display: flex;
+  justify-content: center;
+  align-intems: central;
+  place-items: center;
+  min-height: 50vh;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color:var(--yellow-link);
+  transition: 0.4s;
+}
+
+a svg path {
+  fill: var(--yellow-link);
+} 
+
+
+
+@media (hover: hover) {
+  a:hover {
+    color: var(--color-text);
+  }
+
+  a:hover svg path {
+    fill: var(--color-text);
+  }
+
+}
+
+.button {
+  padding: 20px 30px;
+  background-color: var(--button);
+  color: var( --color-background);
+  cursor: pointer;
+}
+
+.button:hover, .button:active {
+  background-color: var(--button-hover);
+  color: var(--color-text);
+}
+
+.done {
+  text-decoration: line-through;
 }
