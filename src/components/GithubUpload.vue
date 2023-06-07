@@ -19,6 +19,9 @@ const authUrl = store.authURL;
 </template>
 
 <style>
+.octicon {
+  vertical-align: bottom;
+}
 
 </style>
 

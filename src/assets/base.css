@@ -126,23 +126,23 @@ body {
   color: var(--color-text);
   background-color: var(--color-background);
   font-family: var(--font-family);
+  min-width: 800px;
 }
 
 h1 {
   color: var(--color-header-text);
   font-family: var(--font-family);
-  font-size: 3.2rem;
+  font-size: 2.4rem;
 }
 
 h1 .git {
   color: var(--link-color);
-
 }
 
 h2 {
   color: var(--color-header-text);
   font-family: var(--font-family);
-  font-size: 2.4rem;
+  font-size: 1.6rem;
 }
 
 .central-content {
@@ -163,8 +163,6 @@ a {
 a svg path {
   fill: var(--yellow-link);
 } 
-
-
 
 @media (hover: hover) {
   a:hover {
