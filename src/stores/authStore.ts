@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import router from '@/router';
 
 export const useAuthStore = defineStore('auth-store', {
   state: () => ({
@@ -39,12 +40,14 @@ export const useAuthStore = defineStore('auth-store', {
           accept: "json"
         })
       }).then((result) => {
+        if (result.status === 403) {
+          throw new Error(result.json());
+        }
         return result.json()
       }).then((body) => {
-        console.log("Successfully authorized", body);
         localStorage.setItem("auth", JSON.stringify(body));
         this.initStore();
-      });
+      })
     }, 
     async fetchRepositories() {
       return await fetch(`${import.meta.env.VITE_BACKEND}/repositories?`+new URLSearchParams({
@@ -58,7 +61,6 @@ export const useAuthStore = defineStore('auth-store', {
       }).catch(err=>{
         console.log("err happened", err);
       }).then((result) => {
-        console.log("kris:2");
         return result.json()
       }).then((body) => {
         console.log("kris:3");
