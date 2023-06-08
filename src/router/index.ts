@@ -4,7 +4,7 @@ import AuthorizedView from '../views/AuthorizedView.vue';
 import SelectRepoView from '../views/SelectRepoView.vue';
 import IndexView from '../views/IndexView.vue';
 import FirstAssignmentView from '../views/FirstAssignmentView.vue';
-
+import UserNotFound from '../views/UserNotFound.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,6 +35,12 @@ const router = createRouter({
       path: '/first-assignment',
       name: 'first-assignment',
       component: FirstAssignmentView,
+      props: (route) => ({ foo: route.query }),  
+    },
+    {
+      path: '/user-not-found',
+      name: 'user-not-found',
+      component: UserNotFound,
       props: (route) => ({ foo: route.query }),  
     }
   ]

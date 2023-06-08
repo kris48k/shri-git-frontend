@@ -5,14 +5,16 @@ import router from "../router";
 const code = router.currentRoute.value.query.code;
 
 const store = useAuthStore();
-await store.authenticate(code?.toString() || '');
-router.push('/select-repo');
+store.authenticate(code?.toString() || '').then(()=>{
+  router.push('/select-repo');
+}).catch(()=>{
+  router.push('/user-not-found');
+});
+
 
 </script>
 <template>
-  <div class="about">
-    <h1>Authorizing...</h1>
-  </div>
+    <h2>Авторизация...</h2>
 </template>
 
 <style>
