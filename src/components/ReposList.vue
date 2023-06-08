@@ -11,7 +11,6 @@ export default defineComponent({
     },
     async setup(){
         const store = useAuthStore();
-        await store.fetchRepositories();
         const options = store.repositories.map(e=> { return {label: e.name, value: e.id }});
         function handleUpdateValue (value, options) {
             store.setCurrentRepo({ value, label: options.label });

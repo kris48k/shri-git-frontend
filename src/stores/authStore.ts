@@ -20,12 +20,13 @@ export const useAuthStore = defineStore('auth-store', {
   actions: {
     initStore() {
         const auth = JSON.parse(localStorage.getItem("auth") || '{}') || {};
-        const { login, name, token, currentRepo } = auth || {};
+        const { login, name, token, currentRepo, repositories } = auth || {};
         if (token) {
           this.login = login;
           this.token = token;
           this.name = name;
           this.currentRepo = currentRepo;
+          this.repositories = repositories;
         }
 
     }, 
@@ -40,7 +41,7 @@ export const useAuthStore = defineStore('auth-store', {
           accept: "json"
         })
       }).then((result) => {
-        if (result.status === 403) {
+        if (result.status !== 200) {
           throw new Error(result.json());
         }
         return result.json()
