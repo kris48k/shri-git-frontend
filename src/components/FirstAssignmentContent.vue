@@ -1,36 +1,5 @@
-<script lang="ts">
-import { defineComponent, Suspense} from 'vue';
-import { useFirstAssignmentStore } from '@/stores/firstAssignmentStore';
-import { useAuthStore } from '@/stores/authStore';
-
-export default defineComponent({
-    components: {
-    },
-    setup(){
-        //const store = useAuthStore();
-        //store.initAssignment();
-        return {
-            name: "",//store.name,
-            repo: "",// store.currentRepo.label
-            error: null,
-            onClick: ()=>{
-                setTimeout(()=>{ // тут будет вызов апи
-                    const success = Math.random() > 0.5;
-                    if (success) {
-
-                    } else {
-                        //this.error = "Задание выполнено не верно";
-                    }
-                }, 1000);
-            }
-        };
-    }
-})
-
-</script>
-
 <template>
-    <h2>Задание первое:</h2>
+    <h2>Задание первое: Базовые команды</h2>
     <div>
         Ты присоединился к команде разработчиков нового интернет магазина. Ты уже умеешь писать код и решил попробовать свои силы в командной работе. Ты присоединился к команде, в которой уже работал опытный тимлид Аркадий. 
         Аркаша дал тебе задание сделать правки уже в существующем проект. Ты приступил к работе, но когда закончил писать код, ты понял, что тебе нужно его опубликовать и представить другим разработчикам.
@@ -52,13 +21,4 @@ export default defineComponent({
         <li>Сделать коммит c сообщением <span class="msg">5 api</span></li>
         <li>Сделать пуш в свой репозиторий</li>
     </ul>
-    <button class="button">Проверить результат</button>
 </template>
-
-<style>
-.tasks {
-    margin-bottom: 20px;
-}
-</style>
-
-

@@ -50,25 +50,25 @@ export const useAuthStore = defineStore('auth-store', {
         this.initStore();
       })
     }, 
-    async fetchRepositories() {
-      return await fetch(`${import.meta.env.VITE_BACKEND}/repositories?`+new URLSearchParams({
-          token: this.token ?? '',
-          user: this.login ?? ''
-        }), {
-        method: 'GET',
+    async saveCurrentRepo(){
+      return await fetch(`${import.meta.env.VITE_BACKEND}/save_repo`, {
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json;charset=utf-8'
+          'Content-Type': 'application/json;charset=utf-8',
+          'Authorization': `Bearer ${this.token}`
         },
-      }).catch(err=>{
-        console.log("err happened", err);
+        body: JSON.stringify({
+          repo: this.currentRepo,
+          accept: "json"
+        })
       }).then((result) => {
+        if (result.status !== 200) {
+          throw new Error(result.json());
+        }
         return result.json()
-      }).then((body) => {
-        console.log("kris:3");
-        console.log("Successfully got repos", body);
-        this.repositories = [...body];        
       });
-    },
+    }, 
+
     async initAssignment(){
       const { token, login, currentRepo } = this;
       return await fetch(`${import.meta.env.VITE_BACKEND}/first/init`, {
@@ -95,6 +95,7 @@ export const useAuthStore = defineStore('auth-store', {
     },
     setCurrentRepo(repo: { label: string, value: string}) {
       this.currentRepo = repo;
+      this.saveCurrentRepo();
       this.saveStore();
     }
   },
