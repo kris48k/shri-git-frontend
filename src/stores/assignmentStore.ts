@@ -6,18 +6,38 @@ export const useAssignmentStore = defineStore('assignment-store', {
     error: null,
     success: false,
     checking: false,
-    currentTask: 1
+    activeTask: 1,
+    loading: true
   }),
   getters: { 
     auth() : any {
         const authStore = useAuthStore();
         return authStore;
     },
-    canSeeAssignment(): boolean {
-      return true; // TODO
+  },
+  actions: {
+    async doCheck(){
+
     },
     async checkStatus(){
-
+      return await fetch(`${import.meta.env.VITE_BACKEND}/user`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          'Authorization': `Bearer ${this.auth.token}`
+        },
+      }).then((result) => {
+        this.loading = false;
+        if (result.status !== 200) {
+          this.success = false;
+          this.error = true;
+          throw new Error(result.json());
+        }
+        this.success = true;
+        return result.json()
+      }).then(body=>{
+        this.activeTask = body.activeTask;
+      });
     },
     async checkAssignment(){
       return await fetch(`${import.meta.env.VITE_BACKEND}/init_check`, {
@@ -37,10 +57,5 @@ export const useAssignmentStore = defineStore('assignment-store', {
         return result.json()
       });
     }, 
-  },
-  actions: {
-    async doCheck(){
-
-    }
   },
 })

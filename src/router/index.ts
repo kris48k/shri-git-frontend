@@ -3,7 +3,7 @@ import LoginView from '../views/LoginView.vue';
 import AuthorizedView from '../views/AuthorizedView.vue';
 import SelectRepoView from '../views/SelectRepoView.vue';
 import IndexView from '../views/IndexView.vue';
-import FirstAssignmentView from '../views/FirstAssignmentView.vue';
+import GenericAssignmentVue from '../views/GenericAssignmentVue.vue';
 import UserNotFound from '../views/UserNotFound.vue';
 import HelloPageVue from '../views/HelloPageVue.vue';
 
@@ -34,9 +34,9 @@ const router = createRouter({
       props: (route) => ({ foo: route.query }),  
     },
     {
-      path: '/first-assignment',
-      name: 'first-assignment',
-      component: FirstAssignmentView,
+      path: '/assignment',
+      name: 'assignment',
+      component: GenericAssignmentVue,
       props: (route) => ({ foo: route.query }),  
     },
     {

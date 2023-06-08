@@ -14,7 +14,8 @@ export default defineComponent({
         const options = store.repositories.map(e=> { return {label: e.name, value: e.id }});
         function handleUpdateValue (value, options) {
             store.setCurrentRepo({ value, label: options.label });
-            router.push('/first-assignment');
+
+            router.push('/assignment');
         };
         return {
             login: store.login, 

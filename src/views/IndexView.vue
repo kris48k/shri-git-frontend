@@ -6,7 +6,7 @@ const store = useAuthStore();
 store.initStore();
 
 if (store.isLoggedIn && store.currentRepo) { 
-  router.push('/first-assignment');
+  router.push('/assignment');
 } else if (store.isLoggedIn) {
     router.push('/select-repo');
 } else {
