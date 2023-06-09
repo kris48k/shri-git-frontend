@@ -48,14 +48,19 @@ export default defineComponent({
             <FourthAssignmentContent v-if="activeTask===4"/>
             <FithAssignmentContent v-if="activeTask===5"/>
         </div>
-        <div class="button-container">
-            <button class="button button-check" :onClick="onClick" :disabled="checking || success">Проверить результат</button>
-            <button v-if="canDoNextTask" class="button button-next-step" :onClick="onNextClick" >Перейти к следующему заданию</button>
-        </div>
-        <div v-if="success || error">
+        <div class="status">
             <div v-if="error" class="error" >Статус: {{ error }}</div>
             <div v-if="success" class="success" >Статус: Задание выполнено успешно!</div>
         </div>
+        <div class="button-container">
+            <button v-if="!success" class="button button-check" :onClick="onClick" :disabled="checking">
+                <span v-if="checking">Проверяем 🧐</span>
+                <span v-else>Проверить результат <span v-if="error">еще раз</span></span>
+                
+            </button>
+            <button v-if="canDoNextTask" class="button button-next-step" :onClick="onNextClick" >Перейти к следующему заданию</button>
+        </div>
+        
         
     </div>
     
@@ -68,10 +73,11 @@ export default defineComponent({
 
 .button {
     margin: 20px;
+    min-width: 300px;
 }
 
-.button-container {
-
+.status {
+    height: 50px;
 }
 
 .error {

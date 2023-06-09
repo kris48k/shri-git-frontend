@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useAuthStore } from './authStore'
+import router from '@/router';
 
 const NUMBER_OF_TASKS = 5;
 
@@ -17,7 +18,13 @@ export const useAssignmentStore = defineStore('assignment-store', {
         return authStore;
     },
     canDoNextTask(){
-      return this.success && this.activeTask < NUMBER_OF_TASKS;
+      return this.success && (this.activeTask < NUMBER_OF_TASKS);
+    },
+    isHomeworkOver(){
+      return (
+        this.activeTask > NUMBER_OF_TASKS || (
+        this.activeTask === NUMBER_OF_TASKS && this.success
+      ))
     }
   },
   actions: {
@@ -30,15 +37,16 @@ export const useAssignmentStore = defineStore('assignment-store', {
         },
       }).then((result) => {
         this.loading = false;
-        if (result.status !== 200) {
-          this.success = false;
+        if (result.status !== 200) {         
           this.error = true;
           throw new Error(result.json());
         }
-        this.success = true;
         return result.json()
       }).then(body=>{
         this.activeTask = body.activeTask;
+        if (this.isHomeworkOver) {
+          router.push('/finish');
+        }
       });
     },
     async checkAssignment(){
@@ -57,12 +65,12 @@ export const useAssignmentStore = defineStore('assignment-store', {
         this.checking =  false;
         return result.json();
       }).then((result)=>{
-        result = {"repo":"git@github.com:kris48k/git_2.git","taskId":1,"result":true,"details":{"successCommits":5}};
-        debugger;
         if (result.message) {
+          this.success = false;
           this.error = result.message;
         } else if (result){
           this.success = true;
+          this.error = null;
         }
       }).catch(err => {
         this.error = "Что-то пошло не так, попробуйте позже"

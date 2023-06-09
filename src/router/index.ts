@@ -6,6 +6,8 @@ import IndexView from '../views/IndexView.vue';
 import GenericAssignmentVue from '../views/GenericAssignmentVue.vue';
 import UserNotFound from '../views/UserNotFound.vue';
 import HelloPageVue from '../views/HelloPageVue.vue';
+import FinishPageVue from '../views/FinishPageVue.vue';
+
 
 
 const router = createRouter({
@@ -49,6 +51,12 @@ const router = createRouter({
       path: '/hello-page',
       name: 'hello-page',
       component: HelloPageVue,
+      props: (route) => ({ foo: route.query }),  
+    },
+    {
+      path: '/finish',
+      name: 'finish',
+      component: FinishPageVue,
       props: (route) => ({ foo: route.query }),  
     }
   ]
