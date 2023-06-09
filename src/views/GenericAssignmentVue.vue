@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, Suspense} from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useAssignmentStore } from '@/stores/assignmentStore';
 import FirstAssignmentContent from '@/components/FirstAssignmentContent.vue'
 import SecondAssignmentContent from '@/components/SecondAssignmentContent.vue';
@@ -20,9 +20,9 @@ export default defineComponent({
         const store = useAssignmentStore();
         store.checkStatus();
         return {
-            loading: store.loading,
+            loading: computed(() => store.loading) ,
             error: null,
-            activeTask: store.activeTask,
+            activeTask: computed(() => store.activeTask),
             onClick: ()=>{
                 store.checkAssignment();
             }
@@ -36,11 +36,11 @@ export default defineComponent({
     <div v-if="loading">...</div>
     <div v-else>
         <div class="task-contend">
-            <FirstAssignmentContent v-show="activeTask===1"/>
-            <SecondAssignmentContent v-show="activeTask===2"/>
-            <ThirdAssignmentContent v-show="activeTask===3"/>
-            <FourthAssignmentContent v-show="activeTask===4"/>
-            <FithAssignmentContent v-show="activeTask===5"/>
+            <FirstAssignmentContent v-if="activeTask===1"/>
+            <SecondAssignmentContent v-if="activeTask===2"/>
+            <ThirdAssignmentContent v-if="activeTask===3"/>
+            <FourthAssignmentContent v-if="activeTask===4"/>
+            <FithAssignmentContent v-if="activeTask===5"/>
         </div>
         <button class="button" :onClick="onClick">Проверить результат</button>
     </div>
