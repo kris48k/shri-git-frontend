@@ -5,12 +5,11 @@ import { useAssignmentStore } from '@/stores/assignmentStore';
 
 const store = useAuthStore();
 store.initStore();
-const assignmentStore = useAssignmentStore();
 
 if (store.isLoggedIn && store.currentRepo) { 
   router.push('/assignment');
 } else if (store.isLoggedIn) {
-    router.push('/select-repo');
+    router.push('/assignment');
 } else {
     router.push('/login');
 }

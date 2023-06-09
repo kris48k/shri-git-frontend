@@ -10,6 +10,7 @@ export default defineComponent({
         NSelect
     },
     async setup(){
+        debugger;
         const store = useAuthStore();
         const options = store.repositories.map(e=> { return {label: e.name, value: e.id }});
         function handleUpdateValue (value, options) {

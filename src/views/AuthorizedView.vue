@@ -6,7 +6,7 @@ const code = router.currentRoute.value.query.code;
 
 const store = useAuthStore();
 store.authenticate(code?.toString() || '').then(()=>{
-  router.push('/select-repo');
+  router.push('/hello-page');
 }).catch(()=>{
   router.push('/user-not-found');
 });

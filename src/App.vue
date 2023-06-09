@@ -1,5 +1,5 @@
 <script lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterView } from 'vue-router';
 import { defineComponent } from 'vue';
 import { darkTheme, NConfigProvider } from 'naive-ui';
 import { useAuthStore } from './stores/authStore';

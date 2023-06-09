@@ -71,6 +71,9 @@ export const useAssignmentStore = defineStore('assignment-store', {
         } else if (result){
           this.success = true;
           this.error = null;
+          if (this.isHomeworkOver) {
+            router.push('/finish');
+          }
         }
       }).catch(err => {
         this.error = "Что-то пошло не так, попробуйте позже"
