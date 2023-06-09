@@ -10,7 +10,6 @@ export default defineComponent({
         NSelect
     },
     async setup(){
-        debugger;
         const store = useAuthStore();
         const options = store.repositories.map(e=> { return {label: e.name, value: e.id }});
         function handleUpdateValue (value, options) {
@@ -19,7 +18,7 @@ export default defineComponent({
             router.push('/assignment');
         };
         return {
-            login: store.login, 
+            login: store.login,
             name: store.name,
             value: ref(null),
             options,
@@ -31,7 +30,7 @@ export default defineComponent({
 
 </script>
 
-<template>            
+<template>
     <main>
         <n-select v-model:value="value" placeholder="Выберите репозиторий с домашней работой" :options="options" @update:value="handleUpdateValue"/>
     </main>
