@@ -8,7 +8,7 @@ confetti({
 <template>
     <div class="finish">
         <h2>Поздравляю! Вы успешно прошли все задания!</h2>
-        <img src="src/assets/cat_meme.jpg" class="meme"/>
+        <img src="/src/assets/cat_meme.jpg" class="meme"/>
     </div>
 </template>
 
@@ -23,10 +23,10 @@ confetti({
 }
 
 
-@keyframes show-up {   
-  from {     
-    opacity: 0;   
-  }   
+@keyframes show-up {
+  from {
+    opacity: 0;
+  }
   to {
     opacity: 1;
    }
