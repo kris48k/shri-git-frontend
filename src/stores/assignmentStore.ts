@@ -12,7 +12,7 @@ export const useAssignmentStore = defineStore('assignment-store', {
     activeTask: 1,
     loading: true
   }),
-  getters: { 
+  getters: {
     auth() : any {
         const authStore = useAuthStore();
         return authStore;
@@ -37,7 +37,7 @@ export const useAssignmentStore = defineStore('assignment-store', {
         },
       }).then((result) => {
         this.loading = false;
-        if (result.status !== 200) {         
+        if (result.status !== 200) {
           this.error = true;
           throw new Error(result.json());
         }
@@ -64,18 +64,25 @@ export const useAssignmentStore = defineStore('assignment-store', {
       }).then((result) => {
         this.checking =  false;
         return result.json();
-      }).then((result)=>{
-        if (result.message) {
+      }).then((response)=>{
+        console.log('result', response.result.result);
+        if (response.message) {
           this.success = false;
-          this.error = result.message;
-        } else if (result){
-          this.success = true;
-          this.error = null;
+          this.error = response.message;
+        } else if (response && response.result){
+          this.success = response.result.result;
+
+          if (response.result.result){
+            this.error = null;
+          } else {
+            this.error = 'Не все тесты прошли. Попробуйте еще раз проверить что все условия выполнены.';
+          }
           if (this.isHomeworkOver) {
             router.push('/finish');
           }
         }
       }).catch(err => {
+        console.log('e', err)
         this.error = "Что-то пошло не так, попробуйте позже"
       });
     },
