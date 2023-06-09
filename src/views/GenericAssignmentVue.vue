@@ -6,6 +6,7 @@ import SecondAssignmentContent from '@/components/SecondAssignmentContent.vue';
 import ThirdAssignmentContent from '@/components/ThirdAssignmentContent.vue';
 import FourthAssignmentContent from '@/components/FourthAssignmentContent.vue';
 import FithAssignmentContent from '@/components/FithAssignmentContent.vue';
+import router from '@/router';
 
 
 export default defineComponent({
@@ -18,6 +19,9 @@ export default defineComponent({
     },
     setup(){
         const store = useAssignmentStore();
+        if (!store.auth.isLoggedIn) {
+            router.push('/');
+        }
         store.checkStatus();
         return {
             loading: computed(() => store.loading) ,
@@ -41,27 +45,27 @@ export default defineComponent({
 <template>
     <div v-if="loading">...</div>
     <div v-else>
-        <div class="task-contend">
-            <FirstAssignmentContent v-if="activeTask===1"/>
-            <SecondAssignmentContent v-if="activeTask===2"/>
-            <ThirdAssignmentContent v-if="activeTask===3"/>
-            <FourthAssignmentContent v-if="activeTask===4"/>
-            <FithAssignmentContent v-if="activeTask===5"/>
+        <div class="content-container">
+            <div class="task-contend">
+                <FirstAssignmentContent v-if="activeTask===1"/>
+                <SecondAssignmentContent v-if="activeTask===2"/>
+                <ThirdAssignmentContent v-if="activeTask===3"/>
+                <FourthAssignmentContent v-if="activeTask===4"/>
+                <FithAssignmentContent v-if="activeTask===5"/>
+            </div>
+            <div class="status">
+                <div v-if="error" class="error" >Статус: {{ error }}</div>
+                <div v-if="success" class="success" >Статус: Задание выполнено успешно!</div>
+            </div>
+            <div class="button-container">
+                <button v-if="!success" class="button button-check" :onClick="onClick" :disabled="checking">
+                    <span v-if="checking">Проверяем 🧐</span>
+                    <span v-else>Проверить результат <span v-if="error">еще раз</span></span>
+                    
+                </button>
+                <button v-if="canDoNextTask" class="button button-next-step" :onClick="onNextClick" >Перейти к следующему заданию</button>
+            </div>
         </div>
-        <div class="status">
-            <div v-if="error" class="error" >Статус: {{ error }}</div>
-            <div v-if="success" class="success" >Статус: Задание выполнено успешно!</div>
-        </div>
-        <div class="button-container">
-            <button v-if="!success" class="button button-check" :onClick="onClick" :disabled="checking">
-                <span v-if="checking">Проверяем 🧐</span>
-                <span v-else>Проверить результат <span v-if="error">еще раз</span></span>
-                
-            </button>
-            <button v-if="canDoNextTask" class="button button-next-step" :onClick="onNextClick" >Перейти к следующему заданию</button>
-        </div>
-        
-        
     </div>
     
 </template>
@@ -88,6 +92,10 @@ export default defineComponent({
 .success {
     margin: 20px;
     color: green;
+}
+
+.content-container {
+    max-width: 1200px;
 }
 
 </style>

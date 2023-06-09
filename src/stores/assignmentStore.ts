@@ -65,12 +65,12 @@ export const useAssignmentStore = defineStore('assignment-store', {
         this.checking =  false;
         return result.json();
       }).then((response)=>{
-        console.log('result', response.result.result);
+        console.log('result', response?.result?.result);
         if (response.message) {
           this.success = false;
           this.error = response.message;
         } else if (response && response.result){
-          this.success = response.result.result;
+          this.success = response.result.result ;
 
           if (response.result.result){
             this.error = null;

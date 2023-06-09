@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import router from '@/router';
 import { useAuthStore } from '@/stores/authStore';
-import { useAssignmentStore } from '@/stores/assignmentStore';
 
 const store = useAuthStore();
 store.initStore();

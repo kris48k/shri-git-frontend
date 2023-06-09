@@ -1,8 +1,20 @@
 <script setup lang="ts">
-confetti({
-  particleCount: 1000,
-  spread: 2000,
-});
+import router from '@/router';
+import { useAuthStore } from '@/stores/authStore';
+
+const store = useAuthStore();
+store.initStore();
+
+if (!store.isLoggedIn) { 
+  router.push('/');
+} else {
+    confetti({
+        particleCount: 1000,
+        spread: 2000,
+    });
+}
+
+
 </script>
 
 <template>

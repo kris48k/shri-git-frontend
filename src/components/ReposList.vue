@@ -35,3 +35,11 @@ export default defineComponent({
         <n-select v-model:value="value" placeholder="Выберите репозиторий с домашней работой" :options="options" @update:value="handleUpdateValue"/>
     </main>
 </template>
+
+<style>
+
+.n-select {
+    min-width: 800px;
+}
+
+</style>
