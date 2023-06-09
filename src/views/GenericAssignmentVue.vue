@@ -21,10 +21,16 @@ export default defineComponent({
         store.checkStatus();
         return {
             loading: computed(() => store.loading) ,
-            error: null,
+            error: computed(() => store.error),
             activeTask: computed(() => store.activeTask),
+            checking:  computed(() => store.checking),
+            success:  computed(() => store.success),
+            canDoNextTask:  computed(() => store.canDoNextTask),
             onClick: ()=>{
                 store.checkAssignment();
+            },
+            onNextClick: ()=>{
+                store.nextTask();
             }
         };
     }
@@ -42,7 +48,15 @@ export default defineComponent({
             <FourthAssignmentContent v-if="activeTask===4"/>
             <FithAssignmentContent v-if="activeTask===5"/>
         </div>
-        <button class="button" :onClick="onClick">Проверить результат</button>
+        <div class="button-container">
+            <button class="button button-check" :onClick="onClick" :disabled="checking || success">Проверить результат</button>
+            <button v-if="canDoNextTask" class="button button-next-step" :onClick="onNextClick" >Перейти к следующему заданию</button>
+        </div>
+        <div v-if="success || error">
+            <div v-if="error" class="error" >Статус: {{ error }}</div>
+            <div v-if="success" class="success" >Статус: Задание выполнено успешно!</div>
+        </div>
+        
     </div>
     
 </template>
@@ -51,6 +65,25 @@ export default defineComponent({
 .tasks {
     margin-bottom: 20px;
 }
+
+.button {
+    margin: 20px;
+}
+
+.button-container {
+
+}
+
+.error {
+    margin: 20px;
+    color: red;
+}
+
+.success {
+    margin: 20px;
+    color: green;
+}
+
 </style>
 
 

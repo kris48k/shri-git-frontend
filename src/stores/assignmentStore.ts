@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { useAuthStore } from './authStore'
 
+const NUMBER_OF_TASKS = 5;
+
 export const useAssignmentStore = defineStore('assignment-store', {
   state: () => ({
     error: null,
@@ -14,11 +16,11 @@ export const useAssignmentStore = defineStore('assignment-store', {
         const authStore = useAuthStore();
         return authStore;
     },
+    canDoNextTask(){
+      return this.success && this.activeTask < NUMBER_OF_TASKS;
+    }
   },
   actions: {
-    async doCheck(){
-
-    },
     async checkStatus(){
       return await fetch(`${import.meta.env.VITE_BACKEND}/user`, {
         method: 'GET',
@@ -40,6 +42,7 @@ export const useAssignmentStore = defineStore('assignment-store', {
       });
     },
     async checkAssignment(){
+      this.checking = true;
       return await fetch(`${import.meta.env.VITE_BACKEND}/init_check`, {
         method: 'POST',
         headers: {
@@ -47,15 +50,30 @@ export const useAssignmentStore = defineStore('assignment-store', {
           'Authorization': `Bearer ${this.auth.token}`
         },
         body: JSON.stringify({
-          taskId: 1,
+          taskId: this.activeTask,
           accept: "json"
         })
       }).then((result) => {
-        if (result.status !== 200) {
-          throw new Error(result.json());
+        this.checking =  false;
+        return result.json();
+      }).then((result)=>{
+        result = {"repo":"git@github.com:kris48k/git_2.git","taskId":1,"result":true,"details":{"successCommits":5}};
+        debugger;
+        if (result.message) {
+          this.error = result.message;
+        } else if (result){
+          this.success = true;
         }
-        return result.json()
+      }).catch(err => {
+        this.error = "Что-то пошло не так, попробуйте позже"
       });
-    }, 
+    },
+    nextTask(){
+      if (this.canDoNextTask) {
+        this.activeTask++;
+        this.error = null;
+        this.success = false;
+      }
+    }
   },
 })

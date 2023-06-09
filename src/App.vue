@@ -2,12 +2,19 @@
 import { RouterLink, RouterView } from 'vue-router';
 import { defineComponent } from 'vue';
 import { darkTheme, NConfigProvider } from 'naive-ui';
+import { useAuthStore } from './stores/authStore';
 
 export default defineComponent({
     components: {NConfigProvider},
     setup() {
+      const store = useAuthStore();
       return {
-        darkTheme
+        name: store.isLoggedIn ? store.login : "",
+        darkTheme,
+        debug: import.meta.env.VITE_DEBUG,
+        onClick:()=>{
+          store.reset();
+        }
       }
     }
 })
@@ -16,11 +23,12 @@ export default defineComponent({
 
 <template>
   <header>
-    <h1 class="title">Школа разработки интерфейсов: <span class="git">GIT</span></h1>
-    <div class="users-info">Кристина К</div>
+      <h1 class="title">Школа разработки интерфейсов: <span class="git">GIT</span></h1>
+      <div class="users-info">{{ name }}</div>
+      <button :onClick="onClick">Сбросить прогресс</button>
   </header>
-  <div class="app">
-   
+  <div class="app content-wrapper">
+  
     <div class="content">
       <n-config-provider :theme="darkTheme">
         <RouterView />

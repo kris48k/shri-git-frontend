@@ -67,26 +67,17 @@ export const useAuthStore = defineStore('auth-store', {
         }
         return result.json()
       });
-    }, 
-
-    async initAssignment(){
-      const { token, login, currentRepo } = this;
-      return await fetch(`${import.meta.env.VITE_BACKEND}/first/init`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({
-            token,
-            user: login,
-            repo: currentRepo.label
-        })
-      }).then((result) => {
-        return result.json()
-      }).then((body) => {
-        console.log("Successfully initialized", body);
-      });
-  }, 
+    },
+  async reset(){
+    const { token, login, currentRepo } = this;
+    return await fetch(`${import.meta.env.VITE_BACKEND}/reset`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          'Authorization': `Bearer ${this.token}`
+      },
+    });
+}, 
     saveStore(){
       const { login, token, name, currentRepo } = this;
       localStorage.setItem('auth', JSON.stringify({ 
