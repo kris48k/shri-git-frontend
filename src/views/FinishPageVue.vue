@@ -1,46 +1,21 @@
-<script setup lang="ts">
-import router from '@/router';
-import { useAuthStore } from '@/stores/authStore';
+<script  lang="ts">
+import FinishContent from '../components/FinishContent.vue';
+import { defineComponent } from 'vue';
 
-const store = useAuthStore();
-store.initStore();
 
-if (!store.isLoggedIn) { 
-  router.push('/');
-} else {
-    confetti({
-        particleCount: 1000,
-        spread: 2000,
-    });
-}
-
+export default defineComponent({
+    components: {
+        FinishContent, 
+    },
+    setup(){
+        return {};
+    }
+})
 
 </script>
 
 <template>
-    <div class="finish">
-        <h2>Поздравляю! Вы успешно прошли все задания!</h2>
-        <img src="/src/assets/cat_meme.jpg" class="meme"/>
-    </div>
+    <Suspense>
+        <FinishContent />
+    </Suspense>
 </template>
-
-<style>
-.finish {
-    text-align: center;
-}
-
-.meme {
-    animation: show-up 4s ease;
-
-}
-
-
-@keyframes show-up {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-   }
-}
-</style>
