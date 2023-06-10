@@ -54,8 +54,8 @@ export default defineComponent({
                 <FithAssignmentContent v-if="activeTask===5"/>
             </div>
             <div class="status">
-                <div v-if="error" class="error" >Статус: {{ error }}</div>
-                <div v-if="success" class="success" >Статус: Задание выполнено успешно!</div>
+                <div v-if="error" class="error" > 🔴 {{ error }}</div>
+                <div v-if="success" class="success"> 🟢 Задание выполнено успешно!</div>
             </div>
             <div class="button-container">
                 <button v-if="!success" class="button button-check" :onClick="onClick" :disabled="checking">
@@ -71,17 +71,21 @@ export default defineComponent({
 </template>
 
 <style>
-.tasks {
-    margin-bottom: 20px;
-}
 
 .button {
     margin: 20px;
     min-width: 300px;
 }
 
+.button-check:disabled, .button:hover:disabled, .button:active:disabled {
+    background-color: #fdefab;
+    color: var( --color-background);
+}
+
 .status {
     height: 50px;
+    display: flex;
+    align-items: center;
 }
 
 .error {
@@ -91,11 +95,28 @@ export default defineComponent({
 
 .success {
     margin: 20px;
-    color: green;
+    color: #00ff28;;
 }
 
 .content-container {
     max-width: 1200px;
+}
+
+.joke {
+    color: gray;
+    font-size: 0.6rem;
+}
+
+.descripton {
+    margin: 10px 0;
+}
+
+.tasks li {
+    margin: 10px 0;
+}
+
+.tasks {
+    margin-top: 40px;
 }
 
 </style>
