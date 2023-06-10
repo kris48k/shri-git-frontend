@@ -10,17 +10,20 @@ export default defineComponent({
         NSelect
     },
     async setup(){
+        const value = ref(null);
         const store = useAuthStore();
         const options = store.repositories.map(e=> { return {label: e.name, value: e.id }});
-        function handleUpdateValue (value, options) {
-            store.setCurrentRepo({ value, label: options.label });
+        function handleUpdateValue () {
+            const id = value.value;
+            const selected = options.find(v => v.value === value.value)
+            store.setCurrentRepo({ value: id, label: selected.label });
 
             router.push('/assignment');
         };
         return {
             login: store.login,
             name: store.name,
-            value: ref(null),
+            value,
             options,
             handleUpdateValue
         }
@@ -32,7 +35,8 @@ export default defineComponent({
 
 <template>
     <main>
-        <n-select v-model:value="value" placeholder="Выберите репозиторий с домашней работой" :options="options" @update:value="handleUpdateValue"/>
+        <n-select v-model:value="value" placeholder="Выберите репозиторий с домашней работой" :options="options"/>
+        <button class="button" :onClick="handleUpdateValue">Далее</button>
     </main>
 </template>
 
