@@ -1,6 +1,5 @@
-# shri-git-homework
-
-This template should help get you started developing with Vue 3 in Vite.
+Летняя школа Яндекса. Школа разработки Интерфейсов.
+Курс по GIT. Фронтовая часть для домашней работы курса.
 
 ## Recommended IDE Setup
 
